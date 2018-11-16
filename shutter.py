@@ -28,6 +28,9 @@ def loadFile():
     else:
         print("make photo directory")
         os.mkdir(photo_dir)
+        filename = os.path.join(photo_dir, 'camera.set')
+        with open(filename, mode='w') as fp:
+            fp.write('0')
 
     filename = os.path.join(photo_dir, 'camera.set')
 
