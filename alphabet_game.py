@@ -6,6 +6,7 @@ from pygame.locals import *
 import time
 import os
 import sys
+import subprocess
 
 pygame.init()
 
@@ -16,6 +17,9 @@ sysfont = pygame.font.SysFont(None, 200)
 fpsclock = pygame.time.Clock()
 
 hello = sysfont.render("Alpabet Game", False, (0,0,0))
+
+cmd_beg= 'espeak '
+cmd_end= ' 2>/dev/null'
 
 def screen_opening():
     screen.fill((255,255,255))
@@ -29,6 +33,10 @@ def display_word(word):
     screen.fill((255,255,255))
     screen.blit(display_word, (size[0]/4 , size[1]/3))
     pygame.display.update()
+
+    # text to speech
+    word = word.replace(' ', '_')
+    subprocess.call(cmd_beg+word+cmd_end, shell=True)
 
 if __name__ == '__main__':
     screen_opening()
