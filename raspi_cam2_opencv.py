@@ -2,12 +2,13 @@
 # raspi cam2 demo
 import cv2
 
-from picamera2.picamera2 import *
+from picamera2 import Picamera2
+from libcamera import controls
 
 camera = Picamera2()
-camera.start_preview()
-camera.configure(camera.preview_configuration(main={"format": 'XRGB8888', "size": (640, 480)}))
+camera.configure(camera.create_preview_configuration(main={"format": 'XRGB8888', "size": (640, 480)}))
 camera.start()
+camera.set_controls({'AfMode': controls.AfModeEnum.Continuous})
 
 count_max = 0
 
